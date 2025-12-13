@@ -46,20 +46,20 @@ public class EnemyMovement : MonoBehaviour
         float sqrDistance = toPlayerFlat.sqrMagnitude;
 
         float stopDist = stoppingDistance;
-        if (sqrDistance > stopDist * stopDist)
+        if (sqrDistance > stopDist)
         {
             Vector3 moveDir = toPlayerFlat.normalized;
-            Vector3 movement = moveDir * stats.MoveSpeed * Time.fixedDeltaTime;
 
-            if (movement.sqrMagnitude > sqrDistance)
-            {
-                movement = moveDir * Mathf.Sqrt(sqrDistance);
-            }
+            float desiredMove = stats.MoveSpeed * Time.fixedDeltaTime;
+            float allowedDistanceToMove = sqrDistance - stopDist;
+            float actualMove = Mathf.Min(desiredMove, allowedDistanceToMove);
 
-            if (movement.magnitude > minMoveDistance)
+            if (actualMove > minMoveDistance)
             {
+                Vector3 movement = moveDir * actualMove;
                 rb.MovePosition(rb.position + movement);
             }
+            
         }
 
         else

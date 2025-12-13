@@ -66,7 +66,7 @@ public class SpawnManager : MonoBehaviour
         Vector3 randomOffset = new Vector3(randomCircle.x, 0, randomCircle.y);
 
         Vector3 spwanPos = GameData.Instance.PlayerTransform.position + randomOffset;
-        spwanPos.y = 1;
+        spwanPos.y = 0;
 
         GameObject enemy = Instantiate(enemyPrefab, spwanPos, Quaternion.identity);
         currentEnemies++;

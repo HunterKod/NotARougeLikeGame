@@ -67,10 +67,10 @@ public class EnemyStats : MonoBehaviour
 
     public void ScaleStats(float multiplier)
     {
-        scaledMaxHealth = maxHealth *= multiplier;
-        scaledDamage = doDamage *= multiplier;
-        scaledMoveSpeed = moveSpeed *= multiplier;
-        scaledXpValue = xpValue *= multiplier;
+        scaledMaxHealth = maxHealth * multiplier;
+        scaledDamage = doDamage * multiplier;
+        scaledMoveSpeed = moveSpeed * multiplier;
+        scaledXpValue = xpValue * multiplier;
 
         ResetHealth();
 

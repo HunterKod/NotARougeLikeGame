@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     private CharacterController characterController;
     private Vector3 velocity;
     private bool isGrounded;
+    public bool isRunning;
 
     private void Start()
     {
@@ -42,10 +43,17 @@ public class PlayerController : MonoBehaviour
 
         characterController.Move(inputDir * moveSpeed * Time.deltaTime);
 
+        isRunning = inputDir != Vector3.zero;
+
         if (inputDir.magnitude > 0)
         {
             Quaternion toRotation = Quaternion.LookRotation(inputDir, Vector3.up);
             transform.rotation = Quaternion.Slerp(transform.rotation, toRotation, 10f * Time.deltaTime);
         }
+    }
+
+    public bool IsRunning()
+    {
+        return isRunning;
     }
 }
