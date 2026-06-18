@@ -43,6 +43,8 @@ public class EnemyStats : MonoBehaviour
         currentHealth -= takeDamage;
         currentHealth = Mathf.Clamp(currentHealth, 0f, scaledMaxHealth);
 
+        EventManager.TriggerEnemyDamaged(transform.position, takeDamage);
+
         Debug.Log($"{gameObject.name} took {takeDamage} damage! HP: {currentHealth}/{scaledMaxHealth}");
 
         if (currentHealth <= 0)

@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Threading;
 
 public class SpawnManager : MonoBehaviour
 {
@@ -43,16 +44,22 @@ public class SpawnManager : MonoBehaviour
     private IEnumerator SpawnLoop()
     {
         spawning = true;
+        float timer = 0f;
 
         while (spawning) 
         {
-            if (currentEnemies < maxEnemies)
-            {
-                SpawnEnemy();
-            }
+            float currentInterval = Mathf.Max(0.1f, spwanInterval / Mathf.Sqrt(Mathf.Max(1f, difficultyMultiplier)));
+            timer += Time.deltaTime;
 
-            float interval = Mathf.Max(0.1f, spwanInterval / Mathf.Sqrt(Mathf.Max(1f, difficultyMultiplier)));
-            yield return new WaitForSeconds(interval);
+            if (timer >= currentInterval)
+            {
+                if (currentEnemies < maxEnemies)
+                {
+                    SpawnEnemy();
+                }
+                timer = 0f;
+            }
+            yield return null;
         }
     }
 
